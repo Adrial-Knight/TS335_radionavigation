@@ -5,20 +5,20 @@ addpath("function", "function/conversion", "data");
 
 %% Parametres
 % -- variance du  bruit: interferences
-sigma2 = linspace(0, 1000, 100);
+sigma2 = linspace(0, 1e6, 100);
 Nsim   = 1;  % nombre de repetition de la simulation (lisser la courbe)
 
 % -- bias sur un satellite
-bias  = linspace(-50, 50, 100);
-sat_bias = 2;  % entre 1 et 8
+bias  = linspace(-3000, 5000, 100);
+sat_bias = 4;  % entre 1 et 8
 
 %% Estimation de trajectoires interferees
 % -- coordonnees du point de reference en llh et ECEF (Centre_terre,x,y,z)
-ref.llh  = [deg2rad(44+48/60), deg2rad(-35/60), deg2rad(0)];  % Talence
-ref.ecef = llh2xyz(ref.llh);
+ref.llh  = [deg2rad(44+48/60); deg2rad(-35/60); deg2rad(0)];  % Talence
+ref.ecef = llh2xyz(ref.llh).';
 
 % -- comparaison avec le veritable trajet en coordonnes ECEF
-Xloc.ecef = ned2ecef(Xloc.ned, ref.ecef, ref.llh(1), ref.llh(2)).';
+Xloc.ecef = ned2ecef(Xloc.ned, ref.ecef, ref.llh(1), ref.llh(2));
 
 % -- estimations des erreurs dues aux interferences
 N = length(sigma2);
