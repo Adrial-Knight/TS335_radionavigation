@@ -14,7 +14,6 @@ ref.ecef = llh2xyz(ref.llh).';
 %% Conversion des coordonnees pour affichage / comparaison
 target.ned = ecef2ned(target.ecef, ref.ecef, ref.llh(1), ref.llh(2));
 Xloc.ecef  = ned2ecef(Xloc.ned, ref.ecef, ref.llh(1), ref.llh(2));
-deviation  = vecnorm(Xloc.ned(1:2, :) - target.ned(1:2, :), 2);
 
 %% Affichage
 close all
@@ -22,8 +21,6 @@ close all
 display_traj(target.ned, Xloc.ned, "Coordonnees NED")
 display_traj(target.ecef,Xloc.ecef,"Coordonnees ECEF")
 
-fprintf("Ecart maximal: " + max(deviation) + "m\n")
-
 % -- DOP, PDOP, VDOP et HVOP
 display_DOP(DOP)
-figure("Name", "Erreur quadratique"); plot(deviation); grid; xlabel("t")
+display_quadratic_error(Xloc.ned(1:2, :), target.ned(1:2, :))
