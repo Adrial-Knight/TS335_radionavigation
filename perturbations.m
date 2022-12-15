@@ -6,10 +6,10 @@ addpath("function", "function/conversion", "data");
 %% Parametres
 % -- variance du  bruit: interferences
 sigma2 = linspace(0, 1e6, 100);
-Nsim   = 1;  % nombre de repetition de la simulation (lisser la courbe)
+Nsim   = 1000;  % nombre de repetition de la simulation (lisser la courbe)
 
 % -- bias sur un satellite
-bias  = linspace(-3000, 5000, 100);
+bias  = linspace(-50, 100, 100);
 sat_bias = 4;  % entre 1 et 8
 
 %% Estimation de trajectoires interferees
@@ -27,7 +27,7 @@ for i = 1:N
     for j = 1:Nsim
         PRN_interf  = PRN + sqrt(sigma2(i)) * randn(size(PRN));
         target.ecef = eval_traj(ref, sat.ecef, PRN_interf);
-        loss.interf(i) = loss.interf(i) + norm(target.ecef - Xloc.ecef);
+        loss.interf(i) = loss.interf(i) + norm(target.ecef(1:2, :) - Xloc.ecef(1:2, :));
     end
     loss.interf(i) = loss.interf(i) / Nsim;
 end
@@ -39,7 +39,7 @@ for i = 1:M
     PRN_multi_t = PRN;
     PRN_multi_t(sat_bias, :) = PRN(sat_bias, :) + bias(i);
     target.ecef = eval_traj(ref, sat.ecef, PRN_multi_t);
-    loss.multi(i) = norm(target.ecef - Xloc.ecef);
+    loss.multi(i) = norm(target.ecef(1:2, :) - Xloc.ecef(1:2, :));
 end
 
 %% Affichage

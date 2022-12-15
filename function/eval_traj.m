@@ -15,9 +15,10 @@ function [XYZ, DOP] = eval_traj(ref, sat, PRN)
     % Matrice de passage ECEF -> NED pour la matrice H
     lambda = ref.llh(1);
     phi = ref.llh(2);
-    P = [-sin(lambda)*cos(phi),  sin(lambda)*sin(phi), -cos(lambda), 0;
-          sin(phi),              cos(phi),              0,           0;
-          cos(lambda)*cos(phi), -cos(lambda)*sin(phi), -sin(lambda), 0;
+
+    P = [-sin(lambda)*cos(phi), -sin(lambda)*sin(phi), cos(lambda),  0;
+         -sin(phi),              cos(phi),             0,            0;
+         -cos(lambda)*cos(phi), -cos(lambda)*sin(phi), -sin(lambda), 0;
           0,                     0,                     0,           1];
     
     for t = 1:T
@@ -34,15 +35,14 @@ function [XYZ, DOP] = eval_traj(ref, sat, PRN)
         
         % linéarisation
         % -- ordre 0
-        h0 = vecnorm(xyz.rec - xyz.sat).';
+        diff = xyz.rec - xyz.sat;
+        h0 = vecnorm(diff);
         
         % -- ordre 1
-        diff = xyz.rec - xyz.sat;
-        r = vecnorm(diff);
-        H = [diff./r; ones(1, nb_valid)];
+        H = [diff./h0; ones(1, nb_valid)];
     
         % estimation de la position et du biais
-        Z = prn - h0 + H.' * X(:, t);
+        Z = prn - h0.' + H.' * X(:, t);
         X(:, t+1) = Z.' * pinv(H);
 
         % evaluation des DOP
