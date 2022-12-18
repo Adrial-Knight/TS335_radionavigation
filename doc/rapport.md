@@ -1,6 +1,6 @@
 # Systèmes de navigation GPS: Navigation par satellites
 <p align="center">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/Logo_ENSEIRB-MATMECA-Bordeaux_INP.svg" width=50% height=50% title="Logo ENSEIRB">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/Logo_ENSEIRB-MATMECA-Bordeaux_INP.svg" width=50% height=50% title="Logo ENSEIRB">
 </p>
 
 ## Sommaire
@@ -48,7 +48,7 @@ $$
 avec $\lambda$ la latitude du point $P_0$, et $\varphi$ sa longitude. Cette matrice $\mathbf{M}$ est obtenue à partir des deux rotations élémentaires décrite sur les figures suivantes:
 
 <p align="center">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/reperes.png" width=70% height=70% title="Les rotations de repères élémentaires">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/reperes.png" width=70% height=70% title="Les rotations de repères élémentaires">
 </p>
 
 La figure de gauche est associée à la matrice de rotation $\mathbf{R}_{ECEF \rightarrow (x'y'z)}$
@@ -88,7 +88,7 @@ Afin d'estimer la position du véhicule dans le repère local NED, un point de r
 La trajectoire obtenue par l'algorithme des moindres carrés est représentée en bleu sur la figure ci-dessous dans le repère local NED. La trajectoire réelle du véhicule est tracée à titre de comparaison en orange. Sur certaines parties, les courbes se superposent presque parfaitement, avec des décalages allant jusqu'à 16 mètres.
 
 <p align="center">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/trajectoire_estimee.svg" width=100% height=100% title="Trajectoire réelle et estimée">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/trajectoire_estimee.svg" width=100% height=100% title="Trajectoire réelle et estimée">
 </p>
 
 ### Trajectoire du vehicule
@@ -98,7 +98,7 @@ Pour simuler des [interférences](https://github.com/Adrial-Knight/TS335_radiona
 Le résultat de ces simulations est donné sur la figure ci-dessous. Le comportement de l'erreur quadratique des mesures réelles et estimées est linéaire pour de fortes variances du bruit de mesure. Comme ajouter des interférences amène de l'aléatoire, la courbe obtenue oscille. Pour y remédier, la simulation a été effectuée 1000 fois puis moyennée. C'est pourquoi la courbe est lissée.
 
 <p align="center">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/interferences.svg" width=75% height=75% title="Influence des interférences">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/interferences.svg" width=75% height=75% title="Influence des interférences">
 </p>
 
 ### Multi trajets
@@ -107,7 +107,7 @@ Pour simuler un [multi-trajet](https://github.com/Adrial-Knight/TS335_radionavig
 Le résultat est donné sur la prochaine figure. L'erreur évolue quadratiquement avec le biais sur un satellite. Le minimum n'est pas atteint en zéro car les données de référence utilisées doivent avoir un léger biais à l'origine.
 
 <p align="center">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/multi-trajet.svg" width=75% height=75% title="Influence des multi-trajets">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/multi-trajet.svg" width=75% height=75% title="Influence des multi-trajets">
 </p>
 
 ## Dilution Of Precision
@@ -178,8 +178,8 @@ $$
 La figure à gauche donne les DOP calculés à chaque instant; celle de droite suit les erreurs quadratiques entre les positions du plan $(O, x, y)$ estimées et réelles. Un pic de DOP est obtenu entre les échantillons 600 et 700. Il coïncide avec la perte des données d'un satellite supplémentaire (passant de 7 à 6 sur cette période). Malgré cette perte d'information, l'erreur quadratique est inchangée. On en conclut qu'être dans la vision de 6 ou 7 satellites est ici équivalent.
 
 <p align="middle">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/DOP.svg" width=45% height=45% title="DOP et dérivées">
-     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/fig/erreur_quadratique.svg" width=45% height=45% title="Erreurs quadratiques">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/DOP.svg" width=45% height=45% title="DOP et dérivées">
+     <img src="https://github.com/Adrial-Knight/TS335_radionavigation/blob/main/doc/fig/erreur_quadratique.svg" width=45% height=45% title="Erreurs quadratiques">
 </p>
 
 ## Conclusion
